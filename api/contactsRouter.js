@@ -11,16 +11,16 @@ const {isValidId} = require('../middlewares');
 const {validateBody} = require('../decorators');
 const {schemas} = require('../models/contact')
 
-contactsRouter.get('/contacts', get);
+contactsRouter.get('/', get);
 
-contactsRouter.get('/contacts/:id', isValidId, getById);
+contactsRouter.get('/:id', isValidId, getById);
 
-contactsRouter.post('/contacts', validateBody(schemas.addSchema), create);
+contactsRouter.post('/', validateBody(schemas.addSchema), create);
 
-contactsRouter.put('/contacts/:id', validateBody(schemas.addSchema), isValidId, update);
+contactsRouter.put('/:id', validateBody(schemas.addSchema), isValidId, update);
 
-contactsRouter.patch('/contacts/:id/favorite', isValidId, validateBody(schemas.updateFavoriteSchema), updateFavorite);
+contactsRouter.patch('/:id/favorite', isValidId, validateBody(schemas.updateFavoriteSchema), updateFavorite);
 
-contactsRouter.delete('/contacts/:id', isValidId, remove);
+contactsRouter.delete('/:id', isValidId, remove);
 
 module.exports = contactsRouter;

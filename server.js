@@ -15,8 +15,9 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
 app.use(logger(formatsLogger))
 
-const {contactsRouter} = require('./api');
-app.use('/api', contactsRouter);
+const { authRouter, contactsRouter } = require('./api');
+app.use('/api/auth', authRouter)
+app.use('/api/contacts', contactsRouter);
 
 app.use((_, res, __) => {
   res.status(404).json({
