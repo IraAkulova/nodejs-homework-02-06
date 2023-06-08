@@ -9,15 +9,15 @@ const { get,
   remove} = require('../controllers/contacts');
 const {isValidId} = require('../middlewares');
 const {validateBody} = require('../decorators');
-const {schemas} = require('../models/contact')
+const { schemas } = require('../models/contact');
 
 contactsRouter.get('/', get);
 
 contactsRouter.get('/:id', isValidId, getById);
 
-contactsRouter.post('/', validateBody(schemas.addSchema), create);
+contactsRouter.post('/', validateBody(schemas.contactSchema), create);
 
-contactsRouter.put('/:id', validateBody(schemas.addSchema), isValidId, update);
+contactsRouter.put('/:id', validateBody(schemas.contactSchema), isValidId, update);
 
 contactsRouter.patch('/:id/favorite', isValidId, validateBody(schemas.updateFavoriteSchema), updateFavorite);
 

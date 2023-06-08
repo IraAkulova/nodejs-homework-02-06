@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Joi = require('joi');
+const {handleMongooseError} = require('../middlewares');
 
 const user = new Schema(
    {
@@ -23,9 +24,11 @@ const user = new Schema(
   { versionKey: false, timestamps: true }
 );
 
+user.post("save", handleMongooseError);
+
 const User = mongoose.model("user", user);
 
-const addSchema = Joi.object({
+const userSchema = Joi.object({
   password: Joi.string().required(),
   email: Joi.string().email().required(),
   subscription: Joi.string(),
@@ -33,7 +36,7 @@ const addSchema = Joi.object({
 });
 
 const schemas = {
-  addSchema
+  userSchema
 }
 
 module.exports = {
