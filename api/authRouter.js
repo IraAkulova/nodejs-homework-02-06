@@ -3,9 +3,15 @@ const authRouter = express.Router();
 
 const { validateBody } = require('../decorators');
 const { schemas } = require('../models/user');
+// const { auth } = require('../middlewares/auth')
 
-const { register } = require('../controllers/auth');
+const { register, login } = require('../controllers/auth');
 
-authRouter.post('/register', validateBody(schemas.userSchema), register)
+// console.log(getCurrent)
+
+authRouter.post('/register', validateBody(schemas.userSchema), register);
+authRouter.post('/login', validateBody(schemas.userSchema), login);
+// authRouter.get("/current", auth, getCurrent);
+
 
 module.exports = authRouter;

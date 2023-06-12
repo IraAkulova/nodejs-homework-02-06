@@ -1,9 +1,10 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+// const mongoose = require("mongoose");
+// const Schema = mongoose.Schema;
+const { Schema, model } = require('mongoose');
 const Joi = require('joi');
 const {handleMongooseError} = require('../middlewares');
 
-const user = new Schema(
+const userSchema = new Schema(
    {
   password: {
     type: String,
@@ -24,11 +25,11 @@ const user = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-user.post("save", handleMongooseError);
+userSchema.post("save", handleMongooseError);
 
-const User = mongoose.model("user", user);
+const User = model("user", userSchema);
 
-const userSchema = Joi.object({
+const authSchema = Joi.object({
   password: Joi.string().required(),
   email: Joi.string().email().required(),
   subscription: Joi.string(),
@@ -36,10 +37,10 @@ const userSchema = Joi.object({
 });
 
 const schemas = {
-  userSchema
+  authSchema
 }
 
 module.exports = {
+  schemas,
   User,
-  schemas
 };
