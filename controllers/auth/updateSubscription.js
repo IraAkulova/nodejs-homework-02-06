@@ -8,7 +8,8 @@ const updateSubscription = async (req, res, next) => {
   if (error) {
       throw HttpError(400, 'Missing required name field')
     }
-    const result = await User.findByIdAndUpdate({ _id: id }, req.body, { new: true })
+  const result = await User.findByIdAndUpdate({ _id: id }, req.body, { new: true });
+  console.log(result)
     if (result) {
       res.json({
         status: 'success',
