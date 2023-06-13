@@ -1,17 +1,17 @@
-const express = require('express');
+const express = require("express");
 const authRouter = express.Router();
 
-const { validateBody } = require('../decorators');
-const { schemas } = require('../models/user');
-// const { auth } = require('../middlewares/auth')
+const { validateBody } = require("../decorators");
+const authSchema = require("../schemas/authSchema");
+const auth = require("../middlewares/auth");
+// const { isValidId } = require('../middlewares');
 
-const { register, login } = require('../controllers/auth');
+const { register, login, logout, getCurrent } = require("../controllers/auth");
 
-// console.log(getCurrent)
-
-authRouter.post('/register', validateBody(schemas.userSchema), register);
-authRouter.post('/login', validateBody(schemas.userSchema), login);
-// authRouter.get("/current", auth, getCurrent);
-
+authRouter.post("/register", validateBody(authSchema), register);
+authRouter.post("/login", validateBody(authSchema), login);
+authRouter.post("/logout", auth, logout);
+authRouter.get("/current", auth, validateBody(authSchema), getCurrent);
+// authRouter.patch('/:id/subscription', auth, isValidId, validateBody(authSchema), updateSubscription);
 
 module.exports = authRouter;

@@ -4,11 +4,12 @@ const {ctrlWrapper} = require("../../decorators");
 
 const create = async (req, res, next) => {
   const { name, email, phone } = req.body;
+  const { _id: owner } = req.user;
     const { error } = req.body;
     if (error) {
       throw HttpError(400, `Missing required name field`)
     }
-    const result = await Contact.create({ name, email, phone})
+    const result = await Contact.create({ name, email, phone, owner})
     res.status(201).json({
       status: 'success',
       code: 201,

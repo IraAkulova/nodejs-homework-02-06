@@ -1,11 +1,10 @@
 const { ctrlWrapper } = require("../../decorators");
 
 const getCurrent = async(req, res)=> {
-    const {email, name} = req.user;
+    const {email} = req.user;
 
     res.json({
         email,
-        name,
     })
 };
 
