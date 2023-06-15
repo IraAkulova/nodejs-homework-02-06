@@ -6,10 +6,9 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const app = express();
-
 app.use(express.json());
-
 app.use(cors());
+app.use(express.static('public'));
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
